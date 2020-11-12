@@ -1,7 +1,6 @@
-echo "# zyvhr" >> README.md
+git 初始化
 git init
-git add README.md
+git add .
 git commit -m "first commit"
-git branch -M main
 git remote add origin https://github.com/zyxiaohuoji/zyvhr.git
-git push -u origin main
+git push -u origin master

@@ -1,6 +1,7 @@
 package ccs.com.vhr.mapper;
 
 import ccs.com.vhr.model.Menu;
+import ccs.com.vhr.model.Role;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface MenuMapper {
     int updateByPrimaryKey(Menu record);
 
     List<Menu> getMenuByHrId(Integer hrId);
+
+    List<Menu> getAllMenusWithRole();
 }

@@ -1,8 +1,7 @@
 package ccs.com.vhr.controller;
 
 import ccs.com.vhr.model.Menu;
-import ccs.com.vhr.model.RespBean;
-import ccs.com.vhr.service.MenuServic;
+import ccs.com.vhr.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +14,12 @@ import java.util.List;
 public class SystemConfigController {
 
     @Autowired
-    MenuServic menuServic;
+    MenuService menuService;
 
 //  这里放回值应该用 RespBean
     @GetMapping("/menu")
     public List<Menu> getMenuByHrId(){
 
-        return menuServic.getMenuByHrId();
+        return menuService.getMenuByHrId();
     }
 }

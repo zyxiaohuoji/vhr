@@ -1,4 +1,4 @@
-package ccs.com.vhr;
+package ccs.com.vhr.config;
 
 import ccs.com.vhr.model.Hr;
 import ccs.com.vhr.model.RespBean;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.*;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -26,10 +28,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class VhrSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     HrService hrService;
+
+    @Autowired
+    CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
+
+    @Autowired
+    CustomUrlDecisionManager customUrlDecisionManager;
 
     @Bean
     PasswordEncoder passwordEncoder(){
@@ -44,7 +52,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()
+                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+
+                    @Override
+                    public <O extends FilterSecurityInterceptor> O postProcess(O o) {
+                        o.setAccessDecisionManager(customUrlDecisionManager);
+                        o.setSecurityMetadataSource(customFilterInvocationSecurityMetadataSource);
+                        return o;
+                    }
+                })
                 .and()
                 .formLogin()
                 .usernameParameter("username")

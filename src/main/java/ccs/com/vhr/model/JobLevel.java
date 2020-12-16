@@ -1,16 +1,15 @@
 package ccs.com.vhr.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
-public class Position {
+public class JobLevel {
 
     private Integer id;
 
     private String name;
 
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/ShangHai")
+    private String titleLevel;
+
     private Date createDate;
 
     private Boolean enabled;
@@ -29,6 +28,14 @@ public class Position {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getTitleLevel() {
+        return titleLevel;
+    }
+
+    public void setTitleLevel(String titleLevel) {
+        this.titleLevel = titleLevel;
     }
 
     public Date getCreateDate() {

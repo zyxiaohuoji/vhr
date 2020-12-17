@@ -50,4 +50,6 @@ public interface MenuRoleMapper {
      * @mbggenerated Thu Nov 05 10:03:24 CST 2020
      */
     int updateByPrimaryKey(MenuRole record);
+
+    void deleteByRid(Integer rid);
 }

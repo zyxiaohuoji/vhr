@@ -1,6 +1,9 @@
 package ccs.com.vhr.mapper;
 
 import ccs.com.vhr.model.JobLevel;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface JoblevelMapper {
 
@@ -15,4 +18,8 @@ public interface JoblevelMapper {
     int updateByPrimaryKeySelective(JobLevel record);
 
     int updateByPrimaryKey(JobLevel record);
+
+    List<JobLevel> getAllJobLevels();
+
+    int deleteJobLevelByIds(@Param("ids") Integer[] ids);
 }

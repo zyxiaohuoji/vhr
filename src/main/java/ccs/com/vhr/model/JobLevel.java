@@ -1,5 +1,7 @@
 package ccs.com.vhr.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class JobLevel {
@@ -10,6 +12,7 @@ public class JobLevel {
 
     private String titleLevel;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/ShangHai")
     private Date createDate;
 
     private Boolean enabled;

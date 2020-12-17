@@ -11,6 +11,16 @@
   <sql id="Base_Column_List" >
     id, name, titleLevel, createDate, enabled
   </sql>
+  <delete id="deleteJobLevelByIds">
+    delete from joblevel where id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+  <select id="getAllJobLevels" resultMap="BaseResultMap">
+    select * from joblevel
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
@@ -24,8 +34,8 @@
   <insert id="insert" parameterType="ccs.com.vhr.model.JobLevel" >
     insert into joblevel (id, name, titleLevel,
       createDate, enabled)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{titlelevel,jdbcType=CHAR}, 
-      #{createdate,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT})
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{titleLevel,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="ccs.com.vhr.model.JobLevel" >
     insert into joblevel
@@ -36,10 +46,10 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="titlelevel != null" >
+      <if test="titleLevel != null" >
         titleLevel,
       </if>
-      <if test="createdate != null" >
+      <if test="createDate != null" >
         createDate,
       </if>
       <if test="enabled != null" >
@@ -53,11 +63,11 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="titlelevel != null" >
-        #{titlelevel,jdbcType=CHAR},
+      <if test="titleLevel != null" >
+        #{titleLevel,jdbcType=CHAR},
       </if>
-      <if test="createdate != null" >
-        #{createdate,jdbcType=TIMESTAMP},
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="enabled != null" >
         #{enabled,jdbcType=BIT},
@@ -70,11 +80,11 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="titlelevel != null" >
-        titleLevel = #{titlelevel,jdbcType=CHAR},
+      <if test="titleLevel != null" >
+        titleLevel = #{titleLevel,jdbcType=CHAR},
       </if>
-      <if test="createdate != null" >
-        createDate = #{createdate,jdbcType=TIMESTAMP},
+      <if test="createDate != null" >
+        createDate = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="enabled != null" >
         enabled = #{enabled,jdbcType=BIT},
@@ -85,8 +95,8 @@
   <update id="updateByPrimaryKey" parameterType="ccs.com.vhr.model.JobLevel" >
     update joblevel
     set name = #{name,jdbcType=VARCHAR},
-      titleLevel = #{titlelevel,jdbcType=CHAR},
-      createDate = #{createdate,jdbcType=TIMESTAMP},
+      titleLevel = #{titleLevel,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
       enabled = #{enabled,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>

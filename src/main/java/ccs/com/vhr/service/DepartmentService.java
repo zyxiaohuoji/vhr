@@ -27,7 +27,4 @@ public class DepartmentService {
         departmentMapper.deleteDepById(dep);
     }
 
-    public List<Department> getAllDepartments() {
-        return departmentMapper.getAllDepartments();
-    }
 }

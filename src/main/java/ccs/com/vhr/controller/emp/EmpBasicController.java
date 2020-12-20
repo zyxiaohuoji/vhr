@@ -71,7 +71,7 @@ public class EmpBasicController {
 
     @GetMapping("/deps")
     public List<Department> getAllDepartments(){
-        return departmentService.getAllDepartments();
+        return departmentService.getAllDepartmentsByParentId(-1);
     }
 
 }

@@ -3,6 +3,7 @@ package ccs.com.vhr.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class JobLevel {
 
@@ -16,6 +17,13 @@ public class JobLevel {
     private Date createDate;
 
     private Boolean enabled;
+
+    public JobLevel() {
+    }
+
+    public JobLevel(String name) {
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -55,5 +63,13 @@ public class JobLevel {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        JobLevel jobLevel = (JobLevel) o;
+        return Objects.equals(name, jobLevel.name);
     }
 }

@@ -3,6 +3,7 @@ package ccs.com.vhr.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Position {
 
@@ -14,6 +15,13 @@ public class Position {
     private Date createDate;
 
     private Boolean enabled;
+
+    public Position() {
+    }
+
+    public Position(String name) {
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -45,5 +53,13 @@ public class Position {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return Objects.equals(name, position.name);
     }
 }

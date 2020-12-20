@@ -2,6 +2,7 @@ package ccs.com.vhr.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Department {
 
@@ -20,6 +21,13 @@ public class Department {
     private List<Department> children = new ArrayList<>();
 
     private Integer result;
+
+    public Department() {
+    }
+
+    public Department(String name) {
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -83,5 +91,13 @@ public class Department {
 
     public void setResult(Integer result) {
         this.result = result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Department department = (Department) o;
+        return Objects.equals(name, department.name);
     }
 }

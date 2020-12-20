@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/emp/basic")
+@RequestMapping("/employee/basic")
 public class EmpBasicController {
 
     @Autowired
@@ -72,6 +72,22 @@ public class EmpBasicController {
     @GetMapping("/deps")
     public List<Department> getAllDepartments(){
         return departmentService.getAllDepartmentsByParentId(-1);
+    }
+
+    @PutMapping("/")
+    public RespBean updateEmp(@RequestBody Employee employee){
+        if (employeeService.updateEmp(employee) == 1) {
+            return RespBean.ok("更新成功!");
+        }
+        return RespBean.error("更新失败!");
+    }
+
+    @DeleteMapping("/{id}")
+    public RespBean deleteEmpById(@PathVariable Integer id) {
+        if (employeeService.deleteEmpById(id) == 1) {
+            return RespBean.ok("删除成功!");
+        }
+        return RespBean.error("删除失败!");
     }
 
 }

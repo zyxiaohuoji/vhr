@@ -16,7 +16,7 @@
       #{id}
     </foreach>
   </delete>
-  <select id="getAllPosition" resultMap="BaseResultMap">
+  <select id="getAllPositions" resultMap="BaseResultMap">
     SELECT * FROM POSITION
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

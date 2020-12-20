@@ -12,8 +12,8 @@ import java.util.List;
 public class PositionService {
     @Autowired
     PositionMapper positionMapper;
-    public List<Position> getAllPosition() {
-        return positionMapper.getAllPosition();
+    public List<Position> getAllPositions() {
+        return positionMapper.getAllPositions();
     }
 
     public int addPosition(Position position) {

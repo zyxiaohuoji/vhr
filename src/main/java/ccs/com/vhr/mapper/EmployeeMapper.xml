@@ -59,6 +59,9 @@
     school, beginDate, workState, workId, contractTerm, conversionTime, notWorkDate, 
     beginContract, endContract, workAge
   </sql>
+  <select id="maxWorkId" resultType="java.lang.Integer">
+    select max(workId) from EMPLOYEE
+  </select>
   <select id="getTotal" resultType="java.lang.Long">
     SELECT COUNT(*) FROM EMPLOYEE
     <if test="keyword != null and keyword != ''">

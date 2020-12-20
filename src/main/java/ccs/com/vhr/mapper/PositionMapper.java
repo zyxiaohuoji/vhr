@@ -19,7 +19,7 @@ public interface PositionMapper {
 
     int updateByPrimaryKey(Position record);
 
-    List<Position> getAllPosition();
+    List<Position> getAllPositions();
 
     int deletePositionByIds(@Param("ids") Integer[] ids);
 }

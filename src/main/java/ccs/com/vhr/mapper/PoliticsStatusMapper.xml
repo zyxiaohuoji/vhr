@@ -18,6 +18,9 @@
     -->
     id, name
   </sql>
+  <select id="getAllPoliticsStatus" resultMap="BaseResultMap">
+    SELECT * FROM POLITICSSTATUS
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated

@@ -15,8 +15,8 @@ public class PositionController {
     @Autowired
     PositionService positionService;
     @GetMapping("/")
-    public List<Position> getAllPosition(){
-        return positionService.getAllPosition();
+    public List<Position> getAllPositions(){
+        return positionService.getAllPositions();
     }
 
     @PostMapping("/")

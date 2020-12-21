@@ -90,40 +90,86 @@
     select max(workId) from EMPLOYEE
   </select>
   <select id="getTotal" resultType="java.lang.Long">
-    SELECT COUNT(*) FROM EMPLOYEE
-    <if test="keyword != null and keyword != ''">
-    WHERE name like concat('%', #{keyword}, '%')
-    </if>
+    SELECT count(*) FROM employee e
+    <where>
+      <if test="emp!=null">
+        <if test="emp.name !=null and emp.name!=''">
+            AND e.name LIKE concat('%',#{emp.name},'%')
+        </if>
+        <if test="emp.politicId !=null">
+            AND e.politicId =#{emp.politicId}
+        </if>
+        <if test="emp.nationId !=null">
+            AND e.nationId =#{emp.nationId}
+        </if>
+        <if test="emp.jobLevelId !=null">
+            AND e.jobLevelId =#{emp.jobLevelId}
+        </if>
+        <if test="emp.departmentId !=null">
+            AND e.departmentId =#{emp.departmentId}
+        </if>
+        <if test="emp.engageForm !=null and emp.engageForm!=''">
+            AND e.engageForm =#{emp.engageForm}
+        </if>
+        <if test="emp.posId !=null">
+            AND e.posId =#{emp.posId}
+        </if>
+      </if>
+      <if test="beginDateScope !=null">
+            AND e.beginDate BETWEEN #{beginDateScope[0]} AND #{beginDateScope[1]}
+      </if>
+    </where>
   </select>
   <select id="getEmployeeByPage" resultMap="AllEmployeeInfo">
-    SELECT e.*,
-           p.id     pid,
-           p.name   pname,
-           n.id     nid,
-           n.name   nname,
-           d.id     did,
-           d.name   dname,
-           j.id     jid,
-           j.name   jname,
-           pos.id   posid,
-           pos.name posname
-      FROM employee       e,
-           nation         n,
-           politicsstatus p,
-           department     d,
-           joblevel       j,
-           POSITION       pos
-     WHERE e.nationid = n.id
-       AND e.politicid = p.id
-       AND e.departmentid = d.id
-       AND e.joblevelid = j.id
-       AND e.posid = pos.id
-       <if test="keyword != null and keyword != ''">
-       AND e.name like concat('%', #{keyword}, '%')
-       </if>
-       <if test="page != null and size != null">
-        LIMIT #{page}, #{size}
-       </if>
+      SELECT e.*,
+             p.id     pid,
+             p.name   pname,
+             n.id     nid,
+             n.name   nname,
+             d.id     did,
+             d.name   dname,
+             j.id     jid,
+             j.name   jname,
+             pos.id   posid,
+             pos.name posname
+        FROM employee       e,
+             nation         n,
+             politicsstatus p,
+             department     d,
+             joblevel       j,
+             POSITION       pos
+       WHERE e.nationid = n.id
+         AND e.politicid = p.id
+         AND e.departmentid = d.id
+         AND e.joblevelid = j.id
+         AND e.posid = pos.id
+    <if test="emp.name !=null and emp.name!=''">
+         AND e.name LIKE concat('%',#{emp.name},'%')
+    </if>
+    <if test="emp.politicId !=null">
+         AND e.politicId = #{emp.politicId}
+    </if>
+    <if test="emp.nationId !=null">
+         AND e.nationId = #{emp.nationId}
+    </if>
+    <if test="emp.departmentId !=null">
+         AND e.departmentId = #{emp.departmentId}
+    </if>
+    <if test="emp.jobLevelId !=null">
+         AND e.jobLevelId = #{emp.jobLevelId}
+    </if>
+    <if test="emp.engageForm !=null and emp.engageForm!=''">
+         AND e.engageForm = #{emp.engageForm}
+    </if>
+    <if test="emp.posId !=null">
+         and e.posId = #{emp.posId}
+    </if>
+    <if test="beginDateScope !=null">
+         AND e.beginDate BETWEEN #{beginDateScope[0]} AND #{beginDateScope[1]}
+    </if>
+    <if test="page != null and size != null">
+         LIMIT #{page}, #{size}
+    </if>
 
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
